@@ -200,7 +200,7 @@ Ja taaskäivitame Apache2
 ```
 sudo systemctl restart apache2
 ```
-[!Note]
+>[!Note]
 >Kui su apache2 ei tee restarti ära ja väljastab vigu, Kontrolli seda käsuga `sudo systemctl status apache2`
 >Kui saad Perl erroreid on võimalik et jätsid 4. sammu juures mõned käsud sisestamatta.
 >Kui ei, siis kontrolli et sa `.conf` failidest midagi valesti ei sisestanud.
@@ -233,7 +233,7 @@ Default user on `admin` ja parool on `admin`
 Ja ongi OCS inventory server installitud
 <img width="1185" alt="image" src="https://github.com/klausvarik-ivk/Dokumentatsioonid/assets/127380638/5101f665-26d3-49c7-92d8-e5cf0be6baf6">
 
-![NOTE]
+>[!NOTE]
 >Antud veateadet saad lihtsalt kaotada tehes järgnevalt,
 >1. Muuda algsed admin kasutaja parool.
 >2. Kustuta Käsuga `sudo rm /usr/share/ocsinventory-reports/ocsreports/install.php`
