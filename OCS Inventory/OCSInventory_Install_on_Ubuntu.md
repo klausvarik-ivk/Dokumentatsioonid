@@ -49,7 +49,7 @@ sudo apt -y install libapache2-mod-perl2 libapache-dbi-perl libapache-db-perl li
 Kuna Ubuntu 22.04 versioonil on on default PHP versioon 8.0 siis paigaldame selle.
 Seadistame PHP8 ja OCS serveri joaks vajalikud moodulid, selleks käivita järgnev käsk:
 ```
-sudo apt -y install php php-zip php-pclzip php-gd php-soap php-curl php-json php-mbsting php-xml php-mysql
+sudo apt -y install php php-zip php-pclzip php-gd php-soap php-curl php-json php-mbstring php-xml php-mysql
 ```
 ## 4. Perl paigaldus ja kõik vajalikud moodulid.
 Perl ja vajalike moodulite paigaldamiseks käivita järgnevad käskud:
