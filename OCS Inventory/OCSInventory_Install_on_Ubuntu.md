@@ -145,6 +145,104 @@ Enamustele tuleb jätta default, kuid jälgi mida sul küsitakse. näiteks kui o
 ## 7. OCS Inventory Webserveri seadistus.
 Navigeeri `/etc/apache2/conf-available` kataloogi ja muudame `z-ocsinventory-server.conf` ja `zz-ocsinventory-restapi.conf`
 
+Failis `z-ocsinventory-server.conf` muuda `OCS_DB_NAME`, `OCS_DB_local` ja `OCS_DB_PWD` väärtused eelnevalt serverile seadistatud.
+```conf
+# Replace localhost by hostname or ip of MySQL server for WRITE
+  PerlSetEnv OCS_DB_HOST localhost
+  # Replace 3306 by port where running MySQL server, generally 3306
+  PerlSetEnv OCS_DB_PORT 3306
+  # Name of database
+  PerlSetEnv OCS_DB_NAME ocs
+  PerlSetEnv OCS_DB_LOCAL ocs
+  # User allowed to connect to database
+  PerlSetEnv OCS_DB_USER ocs
+  # Password for user
+  PerlSetVar OCS_DB_PWD V2gaTurvalineParool
+  # SSL Configuration
+
+```
+Ja sama tuleb teha ka Failis `zz-ocsinventory-restapi.conf`
+```conf
+<Perl>
+  $ENV{PLACK_ENV} = 'production';
+  $ENV{MOJO_HOME} = '/usr/local/share/perl/5.34.0';
+  $ENV{MOJO_MODE} = 'deployment';
+  $ENV{OCS_DB_HOST} = 'localhost';
+  $ENV{OCS_DB_PORT} = '3306';
+  $ENV{OCS_DB_LOCAL} = 'ocs';
+  $ENV{OCS_DB_NAME} = 'ocs';
+  $ENV{OCS_DB_USER} = 'ocs';
+  $ENV{OCS_DB_PWD} = 'V2gaTurvalineParool';
+  $ENV{OCS_DB_SSL_ENABLED} = 0;
+#  $ENV{OCS_DB_SSL_CLIENT_KEY} = '';
+#  $ENV{OCS_DB_SSL_CLIENT_CERT} = '';
+#  $ENV{OCS_DB_SSL_CA_CERT} = '';
+  $ENV{OCS_DB_SSL_MODE} = 'SSL_MODE_PREFERRED';
+</Perl>
+
+```
+### 7.1 Lülitame Apache config failid sisse.
+```
+sudo a2enconf z-ocsinventory-server.conf
+```
+```
+sudo a2enconf zz-ocsinventory-restapi.conf
+```
+Ja lisaks veel üks config fail mis vaja sisse lülitada.
+```
+sudo a2enconf ocsinventory-reports.conf
+```
+### 7.2 Anname Apachele õigused OCS inventory lib kataloogile.
+```
+sudo chown -R www-data:www-data /var/lib/ocsinventory-reports
+```
+Ja taaskäivitame Apache2
+```
+sudo systemctl restart apache2
+```
+[!Note]
+>Kui su apache2 ei tee restarti ära ja väljastab vigu, Kontrolli seda käsuga `sudo systemctl status apache2`
+>Kui saad Perl erroreid on võimalik et jätsid 4. sammu juures mõned käsud sisestamatta.
+>Kui ei, siis kontrolli et sa `.conf` failidest midagi valesti ei sisestanud.
+>
+
+### 7.3 Kontrolli seadistus
+Vaata faili `/usr/share/ocsinventory-reports/ocsreports/dbconfig.inc.php` kas kõik andmebaasi seadistused on korras.
+
+Asenda `server_ip_address` enda serveri IP addressiga ja mine järgnevale veebilehele:
+```
+http://server_ip_address/ocsreports/install.php
+```
+Ja täida väljad.
+<img width="1375" alt="image" src="https://github.com/klausvarik-ivk/Dokumentatsioonid/assets/127380638/ef87fb27-6395-4d8a-a1b2-22f06bedc911">
+
+Peale andmete sisestamiset ja `send` vajutamist tuleb järgnev ette:
+Vajuta nuppu `Click here to enter OCS-NG GUI` 
+<img width="1149" alt="image" src="https://github.com/klausvarik-ivk/Dokumentatsioonid/assets/127380638/10a6c759-7ef7-4807-8d35-d0d225612657">
+
+Järgmiseks saame veateate et andmebaasi versioon pole õige, selle parandamiseks tuleb vajutada `Perform the update `nuppu.
+<img width="1120" alt="image" src="https://github.com/klausvarik-ivk/Dokumentatsioonid/assets/127380638/bb7ff1d3-875d-4f4c-bfdb-fa6f74532061">
+
+Peale seda saame minna OCS-NG Gui lehele
+<img width="669" alt="image" src="https://github.com/klausvarik-ivk/Dokumentatsioonid/assets/127380638/58f53d9c-7da8-4513-a018-b7f9f932be8b">
+
+Default user on `admin` ja parool on `admin`
+
+<img width="582" alt="image" src="https://github.com/klausvarik-ivk/Dokumentatsioonid/assets/127380638/88dd3733-3404-46bc-bd49-f9d2555486ae">
+
+Ja ongi OCS inventory server installitud
+<img width="1185" alt="image" src="https://github.com/klausvarik-ivk/Dokumentatsioonid/assets/127380638/5101f665-26d3-49c7-92d8-e5cf0be6baf6">
+
+![NOTE]
+>Antud veateadet saad lihtsalt kaotada tehes järgnevalt,
+>1. Muuda algsed admin kasutaja parool.
+>2. Kustuta Käsuga `sudo rm /usr/share/ocsinventory-reports/ocsreports/install.php`
+
+
+
+
+
+
 
 
 
