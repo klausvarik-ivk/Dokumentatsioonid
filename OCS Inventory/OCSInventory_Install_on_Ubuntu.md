@@ -27,12 +27,12 @@
 - Make utility 
 ## 1. Seadista vajalikud moodulid.
 
-### 1.2. Uuendused, andmepaas ja basic moodulid.
+### 1.2. Uuendused, andmebaas ja basic moodulid.
 Et kõik repositorid oleksid värsked, käivita järgnev käsk:
 ```
 sudo apt update
 ```
-Paigaldame MariaDB, kuna to toimib paremini antud olukorras. Selleks käivita järgnev käsk:
+Paigaldame MariaDB, Selleks käivita järgnev käsk:
 ```
 sudo apt install mariadb-server mariadb-client
 ```
