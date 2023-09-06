@@ -27,8 +27,6 @@ Vaata juhendit Code tab-ist või RAW
 > [!WARNING]
 > Antud tekst on hoiatav
 
-> [!ERROR]
-> Antud tekst on error
 
 
 Teksti esile tõstmine:
