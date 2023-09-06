@@ -200,7 +200,7 @@ Ja taaskäivitame Apache2
 ```
 sudo systemctl restart apache2
 ```
-> [!NOTE]
+> [!WARNING]
 > Kui su apache2 ei tee restarti ära ja väljastab vigu, Kontrolli seda käsuga `sudo systemctl status apache2`
 > Kui saad Perl erroreid on võimalik et jätsid 4. sammu juures mõned käsud sisestamatta.
 > Kui ei, siis kontrolli et sa `.conf` failidest midagi valesti ei sisestanud.
@@ -235,16 +235,8 @@ Ja ongi OCS inventory server installitud
 
 > [!NOTE]
 > Antud veateadet saad lihtsalt kaotada tehes järgnevalt,
-> 1. Muuda algsed admin kasutaja parool.
+> 1. Muuda algse admini kasutaja parool.
 > 2. Kustuta Käsuga `sudo rm /usr/share/ocsinventory-reports/ocsreports/install.php`
-
-
-
-
-
-
-
-
 
 
 ### Kasutatud allikad
