@@ -1,2 +1,0 @@
-# Dokumentatsioonid
-Dokumentatsioonide kogum.
